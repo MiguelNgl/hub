@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             buttons[i].style.color = 'white';
         }
         changeColorText.textContent = 'Day Mode'; // Update button text
+        changeColorText.style.backgroundColor = 'white'; // Update button text
+        changeColorText.style.color = 'black'; // Update button text
     }
 
     // Function to apply day mode
@@ -31,6 +33,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             buttons[i].style.color = 'black';
         }
         changeColorText.textContent = 'Night Mode'; // Update button text
+        changeColorText.style.backgroundColor = 'black'; // Update button text
+        changeColorText.style.color = 'white'; // Update button text
     }
 
     // Check the saved mode in localStorage and apply it, defaulting to night mode

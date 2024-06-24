@@ -10,6 +10,10 @@ body{
     background-color: #F9F7F7;
     /*background-color: #092635;*/
     background-color: #070F2B;
+    /*display: flex;
+    justify-content: center;
+    align-content: center;*/
+    font-family: "Roboto";
 }
 
 #left-panel{
@@ -185,16 +189,19 @@ body{
 
 /* styles.css */
 #changeColorText {
-    background-color: lightblue;
-    height: 45px;
-    width: 90px;
+    display: flex;
+    position: fixed; /* Keeps the button fixed in place */
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 50px;
     padding: 5px;
     border-radius: 4%;
     cursor: pointer;
-    font-size: 20px;
     color: black;
     text-align: center;
-    border: solid;
-    border-color: black;
-    border-width: 2px;
+    margin-top: 20px;
+    margin-left: 20px;
+    /*font-size: large;*/
+    font-weight: bold;
 }
