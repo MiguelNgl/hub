@@ -1,5 +1,3 @@
-// script.js
-
 // Wait for the DOM to fully load
 document.addEventListener('DOMContentLoaded', (event) => {
     // Select the text element and the div by their IDs
@@ -9,31 +7,47 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const rightDiv = document.getElementById('right-panel');
     const buttons = document.getElementsByClassName('button');
 
+    // Function to apply night mode
+    function applyNightMode() {
+        mainDiv.style.color = 'white';
+        mainDiv.style.backgroundColor = '#070F2B';
+        leftDiv.style.backgroundColor = '#070F2B';
+        rightDiv.style.backgroundColor = '#070F2B';
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].style.backgroundColor = '#070F2B';
+            buttons[i].style.color = 'white';
+        }
+    }
+
+    // Function to apply day mode
+    function applyDayMode() {
+        mainDiv.style.color = 'black';
+        mainDiv.style.backgroundColor = 'white';
+        leftDiv.style.backgroundColor = 'white';
+        rightDiv.style.backgroundColor = 'white';
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].style.backgroundColor = 'white';
+            buttons[i].style.color = 'black';
+        }
+    }
+
+    // Check the saved mode in localStorage and apply it
+    const savedMode = localStorage.getItem('colorMode');
+    if (savedMode === 'night') {
+        applyNightMode();
+    } else {
+        applyDayMode();
+    }
+
     // Add a click event listener to the text element
     changeColorText.addEventListener('click', () => {
         // Check the current background color and toggle it
         if (mainDiv.style.backgroundColor === 'white') {
-            mainDiv.style.color = 'white'; 
-            mainDiv.style.backgroundColor = '#070F2B';
-            leftDiv.style.backgroundColor = '#070F2B';
-            rightDiv.style.backgroundColor = '#070F2B';
-
-            // Iterate over the buttons collection and change background color
-            for (let i = 0; i < buttons.length; i++) {
-                buttons[i].style.backgroundColor = '#070F2B';
-                buttons[i].style.color = 'white';
-            }
+            applyNightMode();
+            localStorage.setItem('colorMode', 'night');
         } else {
-            mainDiv.style.color = 'black'; 
-            mainDiv.style.backgroundColor = 'white'; 
-            leftDiv.style.backgroundColor = 'white'; 
-            rightDiv.style.backgroundColor = 'white'; 
-
-            // Iterate over the buttons collection and change background color
-            for (let i = 0; i < buttons.length; i++) {
-                buttons[i].style.backgroundColor = 'white';
-                buttons[i].style.color = 'black';
-            }
+            applyDayMode();
+            localStorage.setItem('colorMode', 'day');
         }
     });
 });
