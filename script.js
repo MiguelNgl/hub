@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             buttons[i].style.backgroundColor = '#070F2B';
             buttons[i].style.color = 'white';
         }
+        changeColorText.textContent = 'Day Mode'; // Update button text
     }
 
     // Function to apply day mode
@@ -29,20 +30,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
             buttons[i].style.backgroundColor = 'white';
             buttons[i].style.color = 'black';
         }
+        changeColorText.textContent = 'Night Mode'; // Update button text
     }
 
-    // Check the saved mode in localStorage and apply it
+    // Check the saved mode in localStorage and apply it, defaulting to night mode
     const savedMode = localStorage.getItem('colorMode');
     if (savedMode === 'night') {
         applyNightMode();
     } else {
         applyDayMode();
-    }
 
+    }
     // Add a click event listener to the text element
     changeColorText.addEventListener('click', () => {
-        // Check the current background color and toggle it
-        if (mainDiv.style.backgroundColor === 'white') {
+        // Toggle between night and day mode based on the saved mode
+        const currentMode = localStorage.getItem('colorMode');
+        if (currentMode === 'day') {
             applyNightMode();
             localStorage.setItem('colorMode', 'night');
         } else {
