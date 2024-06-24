@@ -205,3 +205,7 @@ body{
     /*font-size: large;*/
     font-weight: bold;
 }
+
+code{
+    font-weight: bold;
+}

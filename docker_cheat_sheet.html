@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="./style.css">
+        <title>Durham's Hub</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Jersey+25+Charted&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <div id="right-panel">
+                <div id="changeColorText">Day/Night mode</div>
+        </div>
+
+        <div id="main-panel">
+
+            <div id="title-section">
+                <h1 id="title">Durham's Hub</h1>
+            </div>
+
+            <hr/>
+            <div id="navigation-bar">
+                <a href="./index.html"><div id="home-button" class="button"><b>home</b></div></a>
+                <a href="./posts.html"><div id="posts-button" class="button"><b>posts</b></div></a>
+                <a href="./projects.html"><div id="posts-button" class="button"><b>projects</b></div></a>
+                <a href="./tutorials.html"><div id="posts-button" class="button"><b>tutorials</b></div></a>
+                <a href="./cheat_sheets.html"><div id="posts-button" class="button"><b>cheat sheets</b></div></a>
+                <a href="./about_me.html"><div id="about-me-button" class="button"><b>about me</b></div></a>
+                <a href="./contacts.html"><div id="contacts-button" class="button"><b>contacts</b></b></div></a>
+            </div>
+            <hr/>
+
+            <div class="page_body">
+                <h1>Docker Cheat Sheet</h1>
+                <h2>Introduction</h2>
+                <p>
+                    This page is a summary of all the useful docker commands I know. I might use it to create a 
+                    Docker tutorial one day but, for now, it will simply consist of a list of commands.
+                </p>
+                <p>
+                    A small word about the notation that will be used in this cheat sheet:
+                </p>
+                <ul>
+                    <li>When multiple commands are listed with all of them except the first one in between parenthesis,
+                         it means that all of the commands are equivalent.</li>
+                    <li>When multiple commands are listed without any of them in between parenthesis, we are considering 
+                        what happens when we run them sequentially.
+                    </li>
+                </ul>
+            
+                <h2>Docker Commands</h2>
+
+                <h3>Pull an image from Docker Hub</h3>
+                <pre><code>    docker pull &ltimage_name&gt</pre></code>
+                <u>note:</u> this command allows us to dowload the image without running it immeditaly
+
+
+                <h3>Run a container</h3>
+                For all of the commands listed here, if the image is not yet on the host, it is pulled from docker hub automatically.
+                <ul>
+                    <li>
+                        <pre><code>docker run &ltimage_name&gt</pre></code>
+                        <u>note:</u> this is equivalent to running <code>docker run &ltimage_name&gt:latest</code> - i.e. docker defaults to the <em>latest</em> tag.
+                    </li>
+                    <li>
+                        <pre><code>docker run -d &ltimage_name&gt</pre></code>
+                        <u>note:</u> this allows us to run the container in <em>detached</em> mode, i.e. in the background.
+                    </li>
+                    <li>
+                        <pre><code>docker run --name &ltcontainer_name&gt &ltimage_name&gt</pre></code>
+                        <u>note:</u> this allows us to choose the name of the container.
+                    </li>
+                    <li>
+                        <pre><code>docker run &ltimage_name&gt:&lttag&gt</pre></code>
+                        <u>note:</u> this allows us to specify a tag. See registry website to know the available tags for an imagespecify a tag. See registry website to know the available tags for an image.
+                    </li>
+                    <li>
+                        <pre><code>docker run -it &ltimage_name&gt</pre></code>
+                        <u>note:</u> <code>i</code> attaches our stdin to the container (interactive mode - we can give it input) and <code>t</code> attaches to the 
+                        container’s terminal (makes the container able to output on our terminal)
+                    </li>
+                    <li>
+                        <pre><code>docker run &ltimage_name&gt &ltcommand&gt</pre></code>
+                        <u>note:</u> this allows us to run a shell command on the image <code>&ltimage_name&gt</code> output the result on our terminal, e.g. 
+                        <code>docker run python:3.6 cat /etc/*release*</code> to know which OS is used by the <code>python:3.6</code> image.
+                    </li>
+                    <li>
+                        <pre><code>docker run -e &ltenv_var&gt=&ltvalue&gt &ltimage_name&gt </pre></code>
+                        <u>note:</u> this allows us to set a particular environment variable to a specific value in the docker container.
+                    </li>
+                    <li>
+                        <pre><code>docker run --entrypoint &ltcommand&gt &ltimage_name&gt </pre></code>
+                        <u>note:</u> this allows us to overwrite the command specified in the <code>ENTRYPOINT</code> of the Dockerfile with <code>&ltcommand&gt</code>. See the entry on <code>ENTRYPOINT</code> for more details.
+                    </li>
+                    <li>
+                        <pre><code>docker run --restart=&ltrestart_policy&gt &ltimage_name&gt </pre></code>
+                        <u>note:</u> this allows us to set a restart policy for this container. When not specified, it defaults to <code>no</code>. <code>&ltrestart_policy&gt</code> can take values in 
+                        the set <code>{no, on-failure, unless-stopped, always}</code>.
+                    </li>
+                </ul>
+                
+                <h3>Reattach to a container running in the background</h3>
+
+
+
+            </div>
+        </div>
+
+        <div id="left-panel">
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
