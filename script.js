@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Function to apply night mode
     function applyNightMode() {
         mainDiv.style.color = 'white';
-        mainDiv.style.backgroundColor = '#070F2B';
-        leftDiv.style.backgroundColor = '#070F2B';
-        rightDiv.style.backgroundColor = '#070F2B';
+        mainDiv.style.backgroundColor = 'black';
+        leftDiv.style.backgroundColor = 'black';
+        rightDiv.style.backgroundColor = 'black';
         for (let i = 0; i < buttons.length; i++) {
-            buttons[i].style.backgroundColor = '#070F2B';
+            buttons[i].style.backgroundColor = 'black';
             buttons[i].style.color = 'white';
         }
         changeColorText.textContent = 'Day Mode'; // Update button text
