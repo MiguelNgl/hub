@@ -182,7 +182,7 @@
                 <u>note:</u> after <code>&ltimage_name&gt</code>, we can append a tag (<code>&ltimage_name&gt:&lttag&gt</code>) e.g.
                 <code>my_image:lastest</code>
 
-                <h3>dockerfile commands</h3>
+                <h3>Dockerfile commands</h3>
                 <p>
                 This are the commands that can be used in a <em>Dockerfile</em> to specify how the
                 image should be built. They will create corresponding layers which will be
@@ -311,7 +311,7 @@
                 <u>note:</u> <code>&ltinternal_alias&gt</code> is the alias (name) used within the new container (in its
                 code) to refer to the already running one.
 
-                <h3>docker-compose.yaml syntax</h3>
+                <h3>Syntax of <code>docker-compose.yaml</code> files</h3>
 
                 <pre><code>
                 version: &ltversion_number&gt
@@ -346,10 +346,10 @@
                 <u>note:</u> <code>ports</code> allows us to map host and container ports, like when we use the <code>-
                 p</code> option with the <code>docker run</code> command.
 
-                <h3>launch all the services in a <code>docker-compose.yaml</code> file at once</h3>
+                <h3>Launch all the services in a <code>docker-compose.yaml</code> file at once</h3>
                 <pre><code>    docker-compose up</code></pre>
 
-                <h3>docker engine architecture</h3>
+                <h3>Docker engine architecture</h3>
                 The docker engine is a stack composed of 3 elements:
                 <ol>
                     <li>the docker CLI</li>
@@ -368,7 +368,7 @@
                 <u>note:</u> here <remote_host_IP> and <remote_host_port> are the IP and port of
                 the remote host running the REST API and the daemon
 
-                <h3>constraining the ressources used by a docker container</h3>
+                <h3>Constraining the ressources used by a docker container</h3>
                 <pre><code>    docker run --cpus=&ltfraction&gt &ltimage_name&gt</code></pre>
                 <pre><code>    docker run --memory=&ltnumber_mb&gtm &ltimage_name&gt</code></pre>
                 <u>note:</u> <fraction> should be a number between 0 and 1 and represents the
@@ -376,7 +376,7 @@
                 <u>note:</u> <number_mb> represents the number of megabytes of memory allocated
                 to this container.
 
-                <h3>docker sotrage</h3>
+                <h3>Docker sotrage</h3>
                 When docker is installed it creates the following directory struture:
                 <pre><code>
                 |-- /var/lib/docker
@@ -452,7 +452,7 @@
                 <code>&lttarget_path&gt</code> is the path of the directory in the container that we
                 want to mount.
 
-                <h3>docker networking</h3>
+                <h3>Docker networking</h3>
                 When docker is installed, it creates 3 networks automatically:
                 <ul>
                     <li>
