@@ -39,7 +39,18 @@
                     Docker tutorial one day but, for now, it will simply consist of a list of commands.
                 </p>
             
-                <h2>Docker Commands</h2>
+                <nav id="toc">
+                    <ul>
+                        <li><a href="#basics">Basics</a></li>
+                        <li><a href="#image-building">Image building</a></li>
+                        <li><a href="#linking-containers">Linking containers</a></li>
+                        <li><a href="#docker-engine-architecture">Docker engine architecture</a></li>
+                        <li><a href="#docker-storage">Docker storage</a></li>
+                        <li><a href="#docker-networking">Docker networking</a></li>
+                    </ul>
+                </nav>
+                <h2 id="basics">Basics</h2>
+
 
                 <h3 style="margin-top: 20px;">Pull an image from Docker Hub</h3>
                 <pre><code>    docker pull &ltimage_name&gt</pre></code>
@@ -172,7 +183,17 @@
                 </ul>
                 <u>note:</u> the two commands are equivalent
 
-                <h3>Build a docker image from a dockerfile</h3>
+                <h3>Constraining the ressources used by a docker container</h3>
+                <pre><code>    docker run --cpus=&ltfraction&gt &ltimage_name&gt</code></pre>
+                <pre><code>    docker run --memory=&ltnumber_mb&gtm &ltimage_name&gt</code></pre>
+                <u>note:</u> <fraction> should be a number between 0 and 1 and represents the
+                percentage of cpu usage<br>
+                <u>note:</u> <number_mb> represents the number of megabytes of memory allocated
+                to this container.
+
+                <h2 id="image-building">Image building</h2>
+
+                <h3 style="margin-top: 20px;">Build a docker image from a dockerfile</h3>
                 <pre><code>    docker build -t &ltimage_name&gt &ltdir_path&gt</code></pre>
                 <u>note:</u> here <code>&ltdir_path&gt</code> is the path of the directory containing the <em>Dockerfile</em> we want to use for our build.<br>
                 <u>note:</u> here the <code>-t</code> option allows us to specify the name (or <em>tag</em>) of the image
@@ -301,7 +322,9 @@
                 <u>note:</u> after running this command, the CLI will ask you for your username and
                 password to log you in.
 
-                <h3>Run a container and link it to a previously running one</h3>
+                <h2 id="linking-containers">Linking Containers</h2>
+
+                <h3 style="margin-top: 20px;">Run a container and link it to a previously running one</h3>
                 <pre><code>    docker run --link &ltother_container_name&gt:&ltinternal_alias&gt &ltimage_name&gt</code></pre>
                 
                 <u>note:</u> this option is <b>considered legacy and should not be used!</b> It is useful to
@@ -349,7 +372,8 @@
                 <h3>Launch all the services in a <code>docker-compose.yaml</code> file at once</h3>
                 <pre><code>    docker-compose up</code></pre>
 
-                <h3>Docker engine architecture</h3>
+                <h2 id="docker-engine-architecture">Docker Engine Architecture</h2>
+
                 The docker engine is a stack composed of 3 elements:
                 <ol>
                     <li>the docker CLI</li>
@@ -368,15 +392,9 @@
                 <u>note:</u> here <remote_host_IP> and <remote_host_port> are the IP and port of
                 the remote host running the REST API and the daemon
 
-                <h3>Constraining the ressources used by a docker container</h3>
-                <pre><code>    docker run --cpus=&ltfraction&gt &ltimage_name&gt</code></pre>
-                <pre><code>    docker run --memory=&ltnumber_mb&gtm &ltimage_name&gt</code></pre>
-                <u>note:</u> <fraction> should be a number between 0 and 1 and represents the
-                percentage of cpu usage<br>
-                <u>note:</u> <number_mb> represents the number of megabytes of memory allocated
-                to this container.
 
-                <h3>Docker sotrage</h3>
+                <h2 id="docker-storage">Docker storage</h2>
+
                 When docker is installed it creates the following directory struture:
                 <pre><code>
                 |-- /var/lib/docker
@@ -452,7 +470,7 @@
                 <code>&lttarget_path&gt</code> is the path of the directory in the container that we
                 want to mount.
 
-                <h3>Docker networking</h3>
+                <h2 id="docker-networking">Docker networking</h2>
                 When docker is installed, it creates 3 networks automatically:
                 <ul>
                     <li>
