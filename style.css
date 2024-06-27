@@ -162,6 +162,10 @@ body{
     margin-bottom: 15px;
 }
 
+.cheat_sheet h3{
+    margin-top: 60px;
+}
+
 #changeColorText {
     display: flex;
     position: fixed; 
