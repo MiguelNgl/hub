@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="../style.css">
+        <title>Durham's Hub</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Jersey+25+Charted&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <div id="right-panel">
+                <div id="changeColorText">Day/Night mode</div>
+        </div>
+
+        <div id="main-panel">
+
+            <div id="title-section">
+                <h1 id="title">Durham's Hub</h1>
+            </div>
+
+            <hr/>
+            <div id="navigation-bar">
+                <a href="../index.html"><div id="home-button" class="button"><b>home</b></div></a>
+                <a href="../posts.html"><div id="posts-button" class="button"><b>posts</b></div></a>
+                <a href="../projects.html"><div id="posts-button" class="button"><b>projects</b></div></a>
+                <a href="../tutorials.html"><div id="posts-button" class="button"><b>tutorials</b></div></a>
+                <a href="../cheat_sheets.html"><div id="posts-button" class="button"><b>cheat sheets</b></div></a>
+                <a href="../about_me.html"><div id="about-me-button" class="button"><b>about me</b></div></a>
+                <a href="../contacts.html"><div id="contacts-button" class="button"><b>contacts</b></b></div></a>
+            </div>
+            <hr/>
+
+            <div class="page_body cheat_sheet">
+                <h1>Conditional statements and objects boolean values</h1>
+
+                <h2>Introduction</h2>
+                <p>
+                    This post is not intended to discuss in depth the concepts of truthiness of objects in Python, 
+                    although I hope to write about this in a dedicated post in the future.
+                    Instead, it is intended to be a short reminder of a useful trick when writing condidtional statements 
+                    involving sequences.
+                </p>
+                <p>
+                    Enough discussion, let's talk about the trick!
+                </p>
+                <h2>The trick</h2>
+                <p>
+                    When we write
+                    <pre><code>    if &ltcondition&gt</code></pre>
+                    Python tries to evaluate the boolean value corresponding to the <code>&ltcondition&gt</code> expression.
+                    To do this, it calls the <code>__bool__</code> method of the object returned by the  <code>&ltcondition&gt</code> expression.
+                    Remember that everything is an object in Python, which means that whatever this expression is, it returns an object.
+                </p>
+                <p>
+                    What happens then is that the <code>__bool__</code> method returns either <code>True</code> or <code>False</code>
+                    depending on the way it is implemented in the class this object is an instance of; when should an instance of 
+                    this object considered <code>True</code> and when should one be considered <code>False</code>?
+                </p>
+                <p>
+                    This is what happens for objects in which the <code>__bool__</code> method is implemented. But what happens when it is not implemented?
+                    In this case, the <code>__len__</code> method is called, if it is implemented.  
+                    As its name indicates, this method simply returns the 
+                    length of the sequence. If the <code>__len__</code> method is not implemented either,
+                    then the object's truth value defaults to <code>True</code>, unless the object is <code>None</code>.
+                </p>
+                <p>
+                    In the case of Python sequences, the <code>__bool__</code> function is not implemented so the truth value is determined
+                    by the value returned by the <code>__len__</code> method.
+                </p>
+                <p>
+                    So, why is this interesting?
+                    The reason this is interesting for us is due to the way the truth value of an integer is determined. It's very simple:
+                    if the integer is equal to zero, then it evaluates to <code>False</code>. If it is not equal to zero, then it evaluates
+                    to <code>True</code>. This fact, coupled with the fact that the <code>None</code> singleton object always evaluates to 
+                    <code>False</code> is all we need for our little trick.
+                </p>
+                <p>
+                    So what's the trick then? 
+                </p>
+                <p>
+                    Let's consider how we would typically use a sequence we want to retrieve elements from. The first thing we would do, before
+                    doing whatever it is we want to do, is write the following code:
+                    <pre><code>    if my_sequence is not None and len(my_sequence) > 0:
+        # do whatever we want to do
+                    </code></pre>
+                    We first test if the sequence is not equal to None - or more accurately, we test if its memory address is not the same as that 
+                    of the singleton <code>None</code> object via the <code>is</code> operator. Once this is out of the way, we make sure the sequence
+                    actually contains elements. Finally, we do what we originally wanted to do with the sequence.
+                </p>
+                <p>
+                    If you are still awake after this tedious explanation, you noticed something: this is a lot of boilerplate code to write just
+                    to make sure we can use our sequence the way God intended to. This is where our trick kicks in. Instead of writing this code,
+                    we simply write:
+                    <pre><code>    if my_sequence:
+        # do whatever we want to do
+                    </code></pre>
+                </p>
+                <p>
+                    Now why can we do that? Simply because, as we discussed, in order to determine the truth value associated to our <code>my_sequence</code>
+                    object, Python will call its <code>__len__</code> method. Now there are actually 3 things that can happen here:
+                    <ol>
+                        <li>For some reason <code>my_sequence</code> is actually <code>None</code></li>
+                        <li><code>my_sequence</code> is not <code>None</code> and is of length zero</li>
+                        <li><code>my_sequence</code> is not <code>None</code> and is of length greater than zero</li>
+                    </ol>
+                    In the first case, because <code>my_sequence</code> is equal to the <code>None</code> object which has truth value <code>False</code>, <code>my_sequence</code>
+                    will evaluate to <code>False</code>. In the second case, the <code>__len__</code> function will return the value zero which will be 
+                    evaluated to <code>False</code>. In the third case, the <code>__len__</code> function will return a non-zero integer which will
+                    evaluate to <code>True</code>.
+                </p>
+                <p>
+                    Said differently, <code>my_sequence</code> will only evaluate to <code>True</code> if it is not <code>None</code> and if it has 
+                    length superior to zero. This allows us to write a shorter expression and make sure we check both conditions in the right order.
+                </p>
+
+
+
+            </div>
+        </div>
+
+        <div id="left-panel">
+        </div>
+        <script src="../script.js"></script>
+    </body>
+</html>
