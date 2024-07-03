@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const mainDiv = document.getElementById('main-panel');
     const leftDiv = document.getElementById('left-panel');
     const rightDiv = document.getElementById('right-panel');
+    const tableHeaders = document.getElementsByClassName('table_header');
     const buttons = document.getElementsByClassName('button');
 
     // Function to apply night mode
@@ -20,6 +21,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         changeColorText.textContent = 'Day Mode'; // Update button text
         changeColorText.style.backgroundColor = 'white'; // Update button text
         changeColorText.style.color = 'black'; // Update button text
+        for (let i = 0; i < tableHeaders.length; i++) {
+            tableHeaders[i].style.backgroundColor = 'black';
+        }
     }
 
     // Function to apply day mode
@@ -35,6 +39,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         changeColorText.textContent = 'Night Mode'; // Update button text
         changeColorText.style.backgroundColor = 'black'; // Update button text
         changeColorText.style.color = 'white'; // Update button text
+        for (let i = 0; i < tableHeaders.length; i++) {
+            tableHeaders[i].style.backgroundColor = '#f2f2f2';
+        }
     }
 
     // Check the saved mode in localStorage and apply it, defaulting to night mode

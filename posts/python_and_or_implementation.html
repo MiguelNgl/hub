@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="../style.css">
+        <title>Durham's Hub</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Jersey+25+Charted&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <div id="right-panel">
+                <div id="changeColorText">Day/Night mode</div>
+        </div>
+
+        <div id="main-panel">
+
+            <div id="title-section">
+                <h1 id="title">Durham's Hub</h1>
+            </div>
+
+            <hr/>
+            <div id="navigation-bar">
+                <a href="../index.html"><div id="home-button" class="button"><b>home</b></div></a>
+                <a href="../posts.html"><div id="posts-button" class="button"><b>posts</b></div></a>
+                <a href="../projects.html"><div id="posts-button" class="button"><b>projects</b></div></a>
+                <a href="../tutorials.html"><div id="posts-button" class="button"><b>tutorials</b></div></a>
+                <a href="../cheat_sheets.html"><div id="posts-button" class="button"><b>cheat sheets</b></div></a>
+                <a href="../about_me.html"><div id="about-me-button" class="button"><b>about me</b></div></a>
+                <a href="../contacts.html"><div id="contacts-button" class="button"><b>contacts</b></b></div></a>
+            </div>
+            <hr/>
+
+            <div class="page_body cheat_sheet">
+                <h1>Conditional statements and objects boolean values</h1>
+
+                <h2>Introduction</h2>
+                This post discusses the way the <code>or</code> and <code>and</code> operators are implemented in 
+                Python. We will see that understanding these details can prove useful to write short elegant code.
+
+                <h2>Implementation</h2>
+                <p>
+                    Before explaining how the <code>or</code> operator is implemented in Python, let's think of how we could 
+                    implement it.
+                   First, let's have a look at the truth table of this boolean operator.
+                </p>
+
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table_header">A</th>
+                            <th class="table_header">B</th>
+                            <th class="table_header">A <code>or</code> B</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>False</code></td>
+                            <td><code>False</code></td>
+                            <td><code>False</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>False</code></td>
+                            <td><code>True</code></td>
+                            <td><code>True</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>True</code></td>
+                            <td><code>False</code></td>
+                            <td><code>True</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>True</code></td>
+                            <td><code>True</code></td>
+                            <td><code>True</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+
+
+                <p>
+                    We can notice something: whenever the value in the first column is <code>True</code>, we don't need to look at the second column to determine the value of A <code>or</code> B - it's true. When the value of the first column is <code>False</code>, then the 
+                    value of A <code>or</code> B is equal to that of the second column. Assuming we are working with boolean values, this can be expressed very simply as a conditional statement:
+                </p>
+                <pre><code>    def OR (A : bool, B : bool):
+        if A :
+            return A
+        else :
+            return B
+                </code></pre>
+
+                <p>
+                    Similarly, we can have a look at the <code>and</code> operator truth table.
+                </p>
+
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table_header">A</th>
+                            <th class="table_header">B</th>
+                            <th class="table_header">A <code>and</code> B</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>False</code></td>
+                            <td><code>False</code></td>
+                            <td><code>False</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>False</code></td>
+                            <td><code>True</code></td>
+                            <td><code>False</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>True</code></td>
+                            <td><code>False</code></td>
+                            <td><code>False</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>True</code></td>
+                            <td><code>True</code></td>
+                            <td><code>True</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    Here we notice the contrary: when the value of A is <code>False</code>, we know that the value of A <code>or</code> B is <code>False</code> without needing to look at the second column. However, when A is <code>True</code>, the value of A <code>or</code> B
+                    is equal to that of B. Assuming again that we are dealing with boolean values, we can express this as the following conditional statment:
+                </p>
+
+                <pre><code>    def AND (A : bool, B : bool):
+        if not A :
+            return A
+        else :
+            return B
+                </code></pre>
+                
+                <p>
+                    The reason this is interesting is that these operators are actually implemented very similarly to the code we wrote. The only difference is that, in Python, all objects have a truth value determined by their implementation of the <code>__bool__</code> method.
+                    This <code>__bool__</code> method is called when we evaluate the <code>bool()</code> function with the object passed as argument. This call to <code>bool()</code> is actually automatically made when we place an object in an expression that must return 
+                    a boolean value. More precisely, the following pieces of code are equivalent.
+                </p>
+
+                <ol>
+                    <li><pre><code>if my_object :</code></pre></li>
+                    <li><pre><code>if bool(my_object):</code></pre></li>
+                    <li><pre><code>if my_object.__bool__(): </code></pre></li>
+                </ol>
+
+                <p>
+                    What this mean is that the <code>or</code> and <code>and</code> operator can actually be used with any pair of Python objects. Thus, their code would not be constrained to operate only on booleans. It would look more like this:
+                </p>
+
+                <pre><code>    def OR (A, B):
+        if A :
+            return A
+        else :
+            return B
+                </code></pre>
+
+                <pre><code>    def AND (A, B):
+        if not A :
+            return A
+        else :
+            return B
+                </code></pre>
+                
+
+                <p>
+                    Now, the important point in this whole explanation is that <b>the <code>or</code> and <code>and</code> operators do not return boolean values, they return one of the operands!</b>
+                </p>
+                
+
+                <h2>Uses</h2>
+                <p>
+                    So, what is this good for? In this section, we will se a few ways of taking advantage of our understanding of the implementation of these operators to write cool code.
+                </p>
+
+                <h3 style="margin-top:20px;">Default values</h3>
+                <p>
+                    The first application is that of setting a default value. Imagine you have a variable called <code>my_int</code> representing an int which should not take value zero. This could be the case if we plan to 
+                    use <code>my_int</code> to divide another number for example. If it takes value zero, then we want to set it 
+                    to <code>DEFAULT_VALUE</code>. This can be implemented easily using the <code>or</code> operator in the following way:
+                </p>
+                    <pre><code>    my_int = my_int or DEFAULT_VALUE</code></pre>
+                <p>
+                    Here, when the <code>or</code> statement is reached, the truth value of <code>my_int</code> will be evaluated. Because <code>my_int</code> is an int, it will evaluate to <code>False</code> if and only if it
+                    is equal to zero. In this case, because of how the <code>or</code> operator is implemented, <code>DEFAULT_VALUE</code> will be returned. In the case where <code>my_int</code> is not equal to zero, it will
+                    evaluate to <code>True</code> and will be returned. 
+                </p>
+                <p>
+                    This simple <code>or</code> statement thus allows us to set a default value to a variable depending on whether the object it references is <em>truthy</em> or not.
+                    Note that this pattern can also be used to set default values for empty strings, empty lists or <code>None</code> values.
+                </p>
+
+                <h3 style="margin-top:20px;">Access list elements</h3>
+                Assume we want to access the first element of the list <code>my_list</code> but are not sure this list actually contains an element. We could use the following syntax:
+                <pre><code>    first_elem = my_list and my_list[0]</code></pre>
+                This way, <code>first_elem</code> will be set to the empty list, if the list is empty and to the first element, if the list is not empty.
+                If we want to set a default value - let's say <code>None</code> - instead of simply returning the empty list, in the case where the list doesn't contain any element, we can use the following pattern.
+                <pre><code>    first_elem = my_list and my_list[0] or None</code></pre>
+
+                <h3 style="margin-top:20px;">Avoid division by zero</h3>
+                Let's say we have variable <code>a</code> containing an int. We want to divide some other int, referenced by variable <code>b</code>, by <code>a</code> if and only if <code>a</code> is not zero. In the case it 
+                is equal to zero, we want to return zero. This can be done with the following pattern:
+                <pre><code>    division_result = a and b/a</code></pre>
+
+                <h3>Conclusion</h3>
+                <p>
+                    The patterns leveraging the <code>or</code> and <code>and</code> operators we saw in this short post are just a few examples of the kind of things that can be done. Use your imagination!
+                </p>
+            </div>
+        </div>
+
+        <div id="left-panel">
+        </div>
+        <script src="../script.js"></script>
+    </body>
+</html>
