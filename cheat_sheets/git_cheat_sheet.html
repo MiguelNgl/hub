@@ -41,6 +41,7 @@
                     <ul>
                         <li><a href="#basics">Basics</a></li>
                         <li><a href="#git-branches">Git Branches</a></li>
+                        <li><a href="#git-diff">Git Diff</a></li>
                     </ul>
                 </nav>
 
@@ -111,14 +112,52 @@
                 <h2 id="git-branches">Git Branches</h2>
 
 
+                <h3 style="margin-top: 20px;">See what branch we are currently on</h3>
+                <pre><code>    git branch</code></pre>
+
+
+                <h3>Create a new branch (without switching to it)</h3>
+                <pre><code>    git branch &ltbranch_name&gt</code></pre>
+                <u>note:</u> The location in the commits tree where the new branch is created depends on where the current HEAD is!
+
+
+                <h3>Switch to another branch</h3>
+                <ul>
+                    <li><pre><code>    git switch &ltbranch_name&gt</code></pre></li>
+                    <li><pre><code>    git checkout &ltbranch_name&gt</code></pre></li>
+                </ul>
+                <u>note:</u> <code>git switch</code> is a new command introduced to lessen the use of the <code>git checkout</code> command 
+                which does too many things.
 
 
 
+                <h3>Create a new branch and switch to it</h3>
+                <pre><code>    git switch -c &ltbranch_name&gt</code></pre>
+
+                <h3>Delete a branch</h3>
+                <ul>
+                    <li><pre><code>    git branch -d &ltbranch_name&gt</code></pre></li>
+                    <li><pre><code>    git branch -D &ltbranch_name&gt</code></pre></li>
+                </ul>
+                <u>note:</u> We must be on another branch than the one we are trying to delete when running this command! <br>
+                <u>note:</u> the second option, using <code>-D</code>, forces the delete even if the branch is not merged.
+
+                <h3>Rename a branch</h3>
+                <pre><code>    git branch -m &ltnew_branch_name&gt</code></pre>
+                <u>note:</u> We must be on the branch we want to rename when running this command.
 
 
+                <h3>Merge <code>&ltbranch_2&gt</code> into <code>&ltbranch_1&gt</code></h3>
+                <pre><code>    git merge &ltbranch_2&gt</code></pre>
+                <u>note:</u> We must be on branch <code>&ltbranch_1&gt</code> when running this command. <br>
+                <u>note:</u> After running this command, a new commit with the changes of <code>&ltbranch_2&gt</code> will be created on 
+                <code>&ltbranch_1&gt</code> but <code>&ltbranch_2&gt</code> will stay separated and will not be modified at all.<br>
+                <u>note:</u> If there are merge conflicts, the files with the conflicts will be modified by git to put into evidence the conflicts. 
+                A windows showing these conflicts in the default editor will then be opened to allow the user to choose which parts of the conflicting
+                code to keep and which part to throw away. Once this is done, the user can add and commit the results which will create the merge commit.
 
 
-
+                <h2 id="git-diff">Git Diff</h2>
 
             </div>
         </div>
