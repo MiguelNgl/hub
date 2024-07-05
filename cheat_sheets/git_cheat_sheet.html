@@ -140,7 +140,7 @@
                     <li><pre><code>    git branch -D &ltbranch_name&gt</code></pre></li>
                 </ul>
                 <u>note:</u> We must be on another branch than the one we are trying to delete when running this command! <br>
-                <u>note:</u> the second option, using <code>-D</code>, forces the delete even if the branch is not merged.
+                <u>note:</u> The second option, using <code>-D</code>, forces the delete even if the branch is not merged.
 
                 <h3>Rename a branch</h3>
                 <pre><code>    git branch -m &ltnew_branch_name&gt</code></pre>
@@ -149,15 +149,56 @@
 
                 <h3>Merge <code>&ltbranch_2&gt</code> into <code>&ltbranch_1&gt</code></h3>
                 <pre><code>    git merge &ltbranch_2&gt</code></pre>
-                <u>note:</u> We must be on branch <code>&ltbranch_1&gt</code> when running this command. <br>
+                <u>note:</u> We must be on <code>&ltbranch_1&gt</code> when running this command. <br>
                 <u>note:</u> After running this command, a new commit with the changes of <code>&ltbranch_2&gt</code> will be created on 
                 <code>&ltbranch_1&gt</code> but <code>&ltbranch_2&gt</code> will stay separated and will not be modified at all.<br>
                 <u>note:</u> If there are merge conflicts, the files with the conflicts will be modified by git to put into evidence the conflicts. 
-                A windows showing these conflicts in the default editor will then be opened to allow the user to choose which parts of the conflicting
+                A windows showing these conflicts in the default editor configured in git will then be opened to allow the user to choose which parts of the conflicting
                 code to keep and which part to throw away. Once this is done, the user can add and commit the results which will create the merge commit.
 
 
                 <h2 id="git-diff">Git Diff</h2>
+                <u>General note:</u> all the <code>diff</code> commands can be applied (restricted) to a specific file by passing the file name
+                after the command (e.g. <code>git diff &ltmy_file&gt</code>).
+
+                <h3 style="margin-top:20px;">See the difference between the unstaged changes in the working directory and the staged changes</h3>
+                <pre><code>    git diff</code></pre>
+                <u>note:</u> This is a comparison between the working directory and the staging area.
+
+
+                <h3>See the difference between the (staged and unstaged) changes in the working directory and the last commit</h3>
+                <pre><code>    git diff HEAD</code></pre>
+                <u>note:</u> This is a comparison between the [unstaged working directory + staging area] and the last commit.
+
+
+                <h3>See the difference between the staged changes in the working directory and the last commit</h3>
+                <ul>
+                    <li><pre><code>    git diff --staged</code></pre></li>
+                    <li><pre><code>    git diff --cached</code></pre></li>
+                </ul>
+                <u>note:</u> This allows us to see all the changes staged since the last commit. <br>
+                <u>note:</u> This is a comparison between the staging area and the last commit. <br>
+                <u>note:</u> The two commands are equivalent.
+
+                <h3>See the difference between the last commits of two branches</h3>
+                <ul>
+                    <li><pre><code>    git diff &ltbranch_1&gt &ltbranch_2&gt</code></pre></li>
+                    <li><pre><code>    git diff &ltbranch_1&gt..&ltbranch_2&gt</code></pre></li>
+                </ul>
+                <u>note:</u> This is a comparison between the last commits of two branches.<br>
+                <u>note:</u> The two commands are equivalent.
+
+
+                <h3>See the difference between two commits on the same branch</h3>
+                <ul>
+                    <li><pre><code>    git diff &ltcommit_1_hash&gt &ltcommit_2_hash&gt</code></pre></li>
+                    <li><pre><code>    git diff &ltcommit_1_hash&gt..&ltcommit_2_hash&gt</code></pre></li>
+                </ul>
+                <u>note:</u> This is a comparison between two commits on the same branch.<br>
+                <u>note:</u> The two commands are equivalent.
+
+
+
 
             </div>
         </div>
