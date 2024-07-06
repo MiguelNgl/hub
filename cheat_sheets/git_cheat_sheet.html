@@ -42,6 +42,8 @@
                         <li><a href="#basics">Basics</a></li>
                         <li><a href="#git-branches">Git Branches</a></li>
                         <li><a href="#git-diff">Git Diff</a></li>
+                        <li><a href="#stashing">Stashing</a></li>
+                        <li><a href="#undoing-changes">Undoing Changes & Time Traveling</a></li>
                     </ul>
                 </nav>
 
@@ -198,7 +200,45 @@
                 <u>note:</u> The two commands are equivalent.
 
 
+                <h2 id="stashing">Stashing</h2>
 
+
+                <h3 style="margin-top:20px;">Stash all uncommitted changes</h3>
+                <pre><code>    git stash</code></pre>
+                <u>note:</u> This will stash both staged and unstaged changes.<br>
+                <u>note:</u> This will revert the working directory to the state of the last commit.
+
+                <h3>Remove the most recently stashed changes from the stash & apply them to the working directory</h3>
+                <pre><code>    git stash pop</code></pre>
+                <u>note:</u> we can <em>pop</em> the changes on the stash on ANY branch, even a different branch that the one the changes 
+                were originally stashed from! For example, I can <code>stash</code> the changes on <code>&ltbranch_1&gt</code> and then <code>pop</code> them on
+                <code>&ltbranch_2&gt</code>.
+
+                <h3>Apply the most recently stashed changes to the working directory without removing them from the stash</h3>
+                <pre><code>    git stash apply</code></pre>
+                <u>note:</u> This does exactly the same thing than <code>git stash pop</code> but without removing the changes from the stash.<br>
+                <u>note:</u> This command can be used in the same way as <code>git stash pop</code> - see the notes for this command.
+
+                <h3>List the changes stored in the stash</h3>
+                <pre><code>    git stash list</code></pre>
+                <u>note:</u> The git stash is a stack (<em>L.I.F.O.</em>).<br>
+                <u>note:</u> This shows the elements along with their indices, e.g. <code>stash@{0}, stash@{1}, stash@{2},</code> ..., etc.
+                These indices can be used to target specific elements of the stash (i.e. specific stored changes). For example, we 
+                can run the command <code>git stash apply stash@{2}</code> to apply the changes corresponding to the 3<sup>rd</sup> element of the 
+                stash to our working directory while keeping them in the stash (because we are using <code>apply</code> and not <code>pop</code>).
+
+                <h3>Deleting a specific change from the stash</h3>
+                <pre><code>    git stash drop stash@{&ltindex&gt}</code></pre>
+                <u>note:</u> Here <code>&ltindex&gt</code> is the index in the stash of the change we want to drop.
+                For example, <code>git stash drop stash@{2}</code> to drop the 3<sup>rd</sup> element of the stash.
+
+                <h3>Clearing (deleting/emptying) the entire stash</h3>
+                <pre><code>    git stash clear</code></pre>
+
+
+
+                <h2 id="undoing-changes">Undoing Changes & Time Traveling</h2>
+                
 
             </div>
         </div>
