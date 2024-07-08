@@ -240,6 +240,61 @@
                 <h2 id="undoing-changes">Undoing Changes & Time Traveling</h2>
                 
 
+                <h3 style="margin-top: 20px;">View a previous commit</h3>
+                <pre><code>    git checkout &ltcommit_hash&gt</code></pre>
+                <u>note:</u> normally HEAD points to the <em>ref</em> (meaning reference or pointer) corresponding to the tip of a branch.
+                For example, the "master" ref pointing to the tip of the "master" branch. When we run this command, HEAD stops pointing to a branch 
+                ref and instead points directly at a particular commit hash. This state is called <em>detached HEAD</em>.
+
+
+                <h3>Reattach HEAD and go back to the tip of a branch</h3>
+                <pre><code>    git switch &ltbranch_name&gt</code></pre>
+                <u>note:</u> This command should be ran in detached HEAD mode, when trying to go back to the last commit of a branch.
+
+
+                <h3>Reattach HEAD and go back to the last branch we were on before entering detached Head mode</h3>
+                <pre><code>    git switch -</code></pre>
+                <u>note:</u> This command should be ran in detached HEAD mode.
+
+
+                <h3>Create a new branch based on an old commit</h3>
+                <ul>
+                    <li><pre><code>    git switch -c &ltbranch_name&gt</code></pre></li>
+                    <li><pre><code>    git branch &ltbranch_name&gt</code></pre></li>
+                </ul>
+                <u>note:</u> This command should be ran in detached HEAD mode. <br>
+                <u>note:</u> We can simply use the commands to create a branch as ususal. The new branch will be created at a "location"
+                 in the commit history based on where the HEAD pointer is. For example, if we are checking out another commit in "detached HEAD"
+                  mode, the new branch will start from that commit (as we would expect).
+
+
+                <h3>Notaion: Reference a previous commit with respect to HEAD</h3>
+                <pre><code>    HEAD~&ltindex&gt</code></pre>
+                <u>note:</u> Here, <code>&ltindex&gt</code> represents how many commits back we want to go.<br>
+                <u>note:</u> Here <code>&ltindex&gt</code> is how many commits back we want to "go" with respect to where HEAD is now. For example if 
+                    we want to reference the preceeding commit (the one before the one we are on), we would write <code>HEAD~1</code>, 
+                    if we want to go 2 commits back we would write <code>HEAD~2</code>, ..., etc.
+                <u>note:</u> This is with respect to HEAD, not to the tip of the branch!<br>
+                <u>note:</u> this notation can be used in any other git command instead of a commit hash. It's just an "easier" notation to refer to commits instead of using their hash.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
         </div>
 
